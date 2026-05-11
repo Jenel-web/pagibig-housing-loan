@@ -7,15 +7,14 @@ import jakarta.persistence.Id;
 @Entity
 public class PaymentMode {
     @Id
-    @GeneratedValue
-    private Integer modeId;
+    private String modeId;
     private String paymentModeDescription;
 
-    public Integer getModeId() {
+    public String getModeId() {
         return modeId;
     }
 
-    public void setModeId(Integer modeId) {
+    public void setModeId(String modeId) {
         this.modeId = modeId;
     }
 

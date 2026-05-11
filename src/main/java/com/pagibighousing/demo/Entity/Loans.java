@@ -1,15 +1,21 @@
 package com.pagibighousing.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Loans {
+public class    Loans {
 
     @Id
     private String loanId;
+    @ManyToOne
+    @JoinColumn(name = "mode_id")
     private PaymentMode paymentMode;
+    @ManyToOne
+    @JoinColumn(name = "purpose_id")
     private Purpose purpose;
+
+    @ManyToOne
+    @JoinColumn(name = "pag_Ibig_Rtn")
     private Users user;
     private Double desiredLoanAmount;
     private Integer desiredLoanTerm;

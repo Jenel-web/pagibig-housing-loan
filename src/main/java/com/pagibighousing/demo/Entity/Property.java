@@ -7,17 +7,16 @@ import jakarta.persistence.Id;
 @Entity
 public class Property {
     @Id
-    @GeneratedValue
-    private Integer propertyId;
+    private String propertyId;
 
     private String propertyLocation;
     private String titleHolderName;
 
-    public Integer getPropertyId() {
+    public String getPropertyId() {
         return propertyId;
     }
 
-    public void setPropertyId(Integer propertyId) {
+    public void setPropertyId(String propertyId) {
         this.propertyId = propertyId;
     }
 

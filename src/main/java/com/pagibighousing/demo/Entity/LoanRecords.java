@@ -1,17 +1,36 @@
 package com.pagibighousing.demo.Entity;
 
+import com.pagibighousing.demo.Entity.LoanRecordId;
+import com.pagibighousing.demo.Entity.Loans;
+import com.pagibighousing.demo.Entity.Property;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import java.io.Serializable;
 
 @Entity
 public class LoanRecords {
-    @Id
+    @EmbeddedId
+    private LoanRecordId id;
+
+    @ManyToOne
+    @MapsId("loanId") // Maps the 'loanId' part of the composite key
+    @JoinColumn(name = "loan_id")
     private Loans loan;
-    @Id
+
+    @ManyToOne
+    @MapsId("propertyId") // Maps the 'propertyId' part of the composite key
+    @JoinColumn(name = "property_id")
     private Property property;
 
     private Double collateralValue;
+
+    public LoanRecordId getId() {
+        return id;
+    }
+
+    public void setId(LoanRecordId id) {
+        this.id = id;
+    }
 
     public Loans getLoan() {
         return loan;
@@ -37,3 +56,4 @@ public class LoanRecords {
         this.collateralValue = collateralValue;
     }
 }
+

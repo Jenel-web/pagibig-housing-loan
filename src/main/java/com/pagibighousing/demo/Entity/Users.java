@@ -1,12 +1,14 @@
 package com.pagibighousing.demo.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
 @Entity
 public class Users {
+    @Id
     private String pagIbigRtn;
     private String borrowerName;
     private String occupation;
