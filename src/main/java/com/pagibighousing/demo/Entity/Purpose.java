@@ -10,7 +10,7 @@ public class Purpose {
     @Id
     private String purposeId;
 
-    private String purpose_description;
+    private String purposeDescription;
 
     public String getPurposeId() {
         return purposeId;
@@ -21,10 +21,10 @@ public class Purpose {
     }
 
     public String getPurpose_description() {
-        return purpose_description;
+        return purposeDescription;
     }
 
-    public void setPurpose_description(String purpose_description) {
-        this.purpose_description = purpose_description;
+    public void setPurpose_description(String purposeDescription) {
+        this.purposeDescription = purposeDescription;
     }
 }

@@ -1,16 +1,24 @@
 package com.pagibighousing.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Property {
     @Id
     private String propertyId;
-
+    @ManyToOne
+    @JoinColumn(name = "pag_ibig_rtn")
+    private Users user;
     private String propertyLocation;
     private String titleHolderName;
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
     public String getPropertyId() {
         return propertyId;
