@@ -1,12 +1,6 @@
-package com.pagibighousing.demo.Entity;
+package com.pagibighousing.demo.DTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-@Entity
-public class PaymentMode {
-
-    @Id
+public class PaymentModeDTO {
     private String modeId;
     private String paymentModeDescription;
 
