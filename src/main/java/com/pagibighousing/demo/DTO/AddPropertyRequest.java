@@ -1,26 +1,12 @@
-package com.pagibighousing.demo.Entity;
+package com.pagibighousing.demo.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+import com.pagibighousing.demo.Entity.Users;
 
-@Entity
-public class Property {
-    @Id
+public class AddPropertyRequest {
     private String propertyId;
-    @ManyToOne
-    @JoinColumn(name = "pag_ibig_rtn")
-    @JsonIgnoreProperties("properties")
-    private Users user;
+    private String pagIbigRtn;
     private String propertyLocation;
     private String titleHolderName;
-
-    public Users getUser() {
-        return user;
-    }
-
-    public void setUser(Users user) {
-        this.user = user;
-    }
 
     public String getPropertyId() {
         return propertyId;
@@ -28,6 +14,14 @@ public class Property {
 
     public void setPropertyId(String propertyId) {
         this.propertyId = propertyId;
+    }
+
+    public String getPagIbigRtn() {
+        return pagIbigRtn;
+    }
+
+    public void setPagIbigRtn(String pagIbigRtn) {
+        this.pagIbigRtn = pagIbigRtn;
     }
 
     public String getPropertyLocation() {
