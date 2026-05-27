@@ -24,7 +24,7 @@ public class LoansService {
     @Autowired private PaymentModeRepository paymentModeRepository;
 
     @Transactional
-    public String createLoan(AddLoansRequestDTO request){
+    public Loans createLoan(AddLoansRequestDTO request){
 
         Users user = usersRepository.findById(request.getPagIbigRtn())
                 .orElseThrow(() -> new RuntimeException("User not found."));
@@ -68,7 +68,7 @@ public class LoansService {
 
         loanRecordsRepository.save(loanRecord);
 
-        return "Loan saved Successfully";
+        return loan;
     }
 
     //gets all the loan details in a list to be displayed in the frontend.
