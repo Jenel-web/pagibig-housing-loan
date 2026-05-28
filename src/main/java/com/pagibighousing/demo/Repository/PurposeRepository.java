@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PurposeRepository  extends JpaRepository<Purpose, String> {
-
+public interface PurposeRepository extends JpaRepository<Purpose, String> {
 
     Optional<Purpose> findByPurposeId(String purposeId);
+
 }
