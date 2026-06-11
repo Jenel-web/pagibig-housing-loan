@@ -4,6 +4,7 @@ import { AccountCreationForm } from "./components/AccountCreation/AccountCreatio
 import ApplyLoan from "./components/ApplyForLoan/LoanApplicationForm";
 import LogIn from "./components/LogIn/LoginPage";
 import Dashboard from "./components/UserDashboard/Dashboard"; // 🛠️ FIXED: Pointed directly to Dashboard.tsx
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -11,11 +12,25 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<AccountCreationForm />} />
-        <Route path="/apply" element={<ApplyLoan />} />
+        <Route
+          path="/apply"
+          element={
+            <ProtectedRoute>
+              <ApplyLoan />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<LogIn />} />
 
         {/* 🛠️ FIXED: Render the <Dashboard /> component on this path */}
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

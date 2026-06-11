@@ -20,10 +20,10 @@ public class UsersController {
     private UsersService usersService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Users user) {
+    public ResponseEntity<?> registerUser(@RequestBody Users user) {
         try {
-            String response = usersService.registerUser(user);
-            return ResponseEntity.ok(response);
+            Users createdUser = usersService.registerUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

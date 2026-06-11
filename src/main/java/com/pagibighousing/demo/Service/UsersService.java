@@ -16,12 +16,14 @@ public class UsersService {
 
     // Create / Register Profile
     @Transactional
-    public String registerUser(Users user) {
+    public Users registerUser(Users user) {
         if (usersRepository.existsById(user.getPagIbigRtn())) {
             throw new RuntimeException("User with this Pag-IBIG RTN already exists.");
         }
-        usersRepository.save(user);
-        return "User profile registered successfully!";
+        if (usersRepository.findByEmailAddress(user.getEmailAddress()).isPresent()) {
+            throw new RuntimeException("User with this email address already exists.");
+        }
+        return usersRepository.save(user);
     }
 
     // Read / Fetch All Profiles

@@ -1,5 +1,6 @@
 package com.pagibighousing.demo.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.springframework.cglib.core.Local;
@@ -9,16 +10,37 @@ import java.time.LocalDate;
 @Entity
 public class Users {
     @Id
+    @Column(name = "pag_ibig_rtn")
     private String pagIbigRtn;
+
+    @Column(name = "borrower_name")
     private String borrowerName;
+
+    @Column(name = "occupation")
     private String occupation;
+
+    @Column(name = "citizenship")
     private String citizenship;
+
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+
+    @Column(name = "sex")
     private String sex;
+
+    @Column(name = "home_address")
     private String homeAddress;
+
+    @Column(name = "cellphone_number")
     private String cellphoneNumber;
+
+    @Column(name = "email_address", unique = true)
     private String emailAddress;
+
+    @Column(name = "employer_address")
     private String employerAddress;
+
+    @Column(name = "password")
     private String password;
 
     public String getPagIbigRtn() {

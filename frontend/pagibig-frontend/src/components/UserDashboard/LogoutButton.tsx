@@ -11,8 +11,10 @@ export const LogoutButton: React.FC = () => {
     /* 🛠️ SESSION WIPE:
        Removes the display name from the browser cache so the greeting 
        resets cleanly back to "User" for the next login session.
+       Also securely clears the pagIbigRtn authentication token.
     */
     localStorage.removeItem("display_name");
+    localStorage.removeItem("pagIbigRtn");
 
     /* 🛠️ NAVIGATION REDIRECT ROUTE:
        Instantly snaps the browser viewport back to your /login landing frame view.

@@ -19,6 +19,7 @@ interface FormData {
   occupation: string;
   employerAddress: string;
   citizenship: string;
+  password?: string;
 }
 
 export const AccountCreationForm: React.FC = () => {
@@ -34,7 +35,9 @@ export const AccountCreationForm: React.FC = () => {
     occupation: "",
     employerAddress: "",
     citizenship: "",
+    password: "",
   });
+  const [error, setError] = useState("");
 
   const handleInputChange =
     (field: keyof FormData) =>
@@ -45,9 +48,47 @@ export const AccountCreationForm: React.FC = () => {
       }));
     };
 
-  const handleCreateAccount = (e: React.FormEvent) => {
+  const handleCreateAccount = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Creating account with data:", formData);
+    setError("");
+
+    try {
+      // Map form state to the Java Entity JSON expectation
+      const payload = {
+        pagIbigRtn: formData.registrationNumber,
+        borrowerName: formData.fullName,
+        dateOfBirth: formData.dateOfBirth,
+        sex: formData.sex,
+        emailAddress: formData.emailAddress,
+        cellphoneNumber: formData.cellphoneNumber,
+        homeAddress: formData.homeAddress,
+        occupation: formData.occupation,
+        employerAddress: formData.employerAddress,
+        citizenship: formData.citizenship,
+        password: formData.password,
+      };
+
+      const response = await fetch("http://localhost:8080/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorMsg = await response.text();
+        throw new Error(errorMsg || "Registration failed");
+      }
+
+      const userData = await response.json();
+      
+      // Auto-login after successful registration
+      localStorage.setItem("pagIbigRtn", userData.pagIbigRtn);
+      localStorage.setItem("display_name", userData.borrowerName);
+      
+      navigate("/dashboard");
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred.");
+    }
   };
 
   const sexOptions = ["Male", "Female"];
@@ -73,6 +114,11 @@ export const AccountCreationForm: React.FC = () => {
           <BackNavigation />
 
           <form onSubmit={handleCreateAccount} className="w-full">
+            {error && (
+              <div className="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 font-semibold text-sm">
+                {error}
+              </div>
+            )}
             {/* Account Information Section */}
             <FormSection title="Account Information">
               <InputField
@@ -169,6 +215,17 @@ export const AccountCreationForm: React.FC = () => {
                 onChange={handleInputChange("citizenship")}
                 required
               />
+              <div className="md:col-span-2">
+                <InputField
+                  label="Password"
+                  name="password"
+                  type="password"
+                  placeholder="Create a strong password"
+                  value={formData.password || ""}
+                  onChange={handleInputChange("password")}
+                  required
+                />
+              </div>
             </FormSection>
 
             {/* Form Control Interactivity Stack */}

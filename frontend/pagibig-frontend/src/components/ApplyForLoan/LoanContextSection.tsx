@@ -5,12 +5,16 @@ interface LoanContextProps {
   isReviewMode: boolean;
   formData: any;
   handleInputChange: (key: string, value: string) => void;
+  purposes: any[];
+  modes: any[];
 }
 
 export const LoanContextSection: React.FC<LoanContextProps> = ({
   isReviewMode,
   formData,
   handleInputChange,
+  purposes,
+  modes,
 }) => {
   return (
     <div className="border-t border-gray-100 pt-5 flex flex-col gap-4">
@@ -30,12 +34,11 @@ export const LoanContextSection: React.FC<LoanContextProps> = ({
             className="w-full h-10 px-3 bg-gray-50 disabled:bg-gray-100 disabled:opacity-80 text-gray-800 rounded-md border border-gray-200 outline-none focus:border-[#112C44] cursor-pointer"
           >
             <option value="">Select Purpose</option>
-            <option value="PO1">Residential House and Lot Purchase</option>
-            <option value="PO2">Commercial Unit Renovation</option>
-            <option value="PO3">Purchase of Car</option>
-            <option value="PO4">Vacant Lot Acquisition</option>
-            <option value="PO5">Home Renovation</option>
-            <option value="PO7">Acquiring Land for Parking</option>
+            {purposes.map((purpose) => (
+              <option key={purpose.purposeId} value={purpose.purposeId}>
+                {purpose.purposeDescription}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -51,11 +54,11 @@ export const LoanContextSection: React.FC<LoanContextProps> = ({
             className="w-full h-10 px-3 bg-gray-50 disabled:bg-gray-100 disabled:opacity-80 text-gray-800 rounded-md border border-gray-200 outline-none focus:border-[#112C44] cursor-pointer"
           >
             <option value="">Select Mode</option>
-            <option value="SAD">Salary Deduction</option>
-            <option value="OTC">Over-the-Counter</option>
-            <option value="PDC">Post-Dated Checks</option>
-            <option value="ADA">Auto-Debit Arrangement</option>
-            <option value="CHE">Cheques</option>
+            {modes.map((mode) => (
+              <option key={mode.modeId} value={mode.modeId}>
+                {mode.modeDescription}
+              </option>
+            ))}
           </select>
         </div>
       </div>

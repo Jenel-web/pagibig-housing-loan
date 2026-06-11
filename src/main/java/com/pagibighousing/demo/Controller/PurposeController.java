@@ -11,6 +11,7 @@ import java.util.List;
 
 @RequestMapping("/purpose")
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class PurposeController {
 
     @Autowired
