@@ -7,17 +7,38 @@ import { Navbar } from "../Navbar";
 export function LoginForm() {
   // Local state to capture the user's name input string
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
 
-    // 🛠️ THE CORE CHANGE: If they typed a name, save it to the browser storage.
-    // If they left it blank, default to "User".
-    const greetingName = name.trim() ? name.trim() : "User";
-    localStorage.setItem("display_name", greetingName);
+    try {
+      const response = await fetch("http://localhost:8080/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ emailAddress: email, password: password }),
+      });
 
-    console.log(`Saving user name: ${greetingName}. Moving to dashboard...`);
-    window.location.href = "/dashboard";
+      if (!response.ok) {
+        throw new Error("Invalid email or password");
+      }
+
+      const userData = await response.json();
+      
+      const greetingName = name.trim() ? name.trim() : userData.borrowerName || "User";
+      localStorage.setItem("display_name", greetingName);
+      localStorage.setItem("pagIbigRtn", userData.pagIbigRtn);
+
+      console.log(`Saving user name: ${greetingName}. Moving to dashboard...`);
+      window.location.href = "/dashboard";
+    } catch (err: any) {
+      setError(err.message || "An error occurred during login");
+    }
   };
 
   return (
@@ -46,10 +67,16 @@ export function LoginForm() {
               onSubmit={handleSubmit}
               className="flex flex-col gap-6 w-full"
             >
+              {error && (
+                <div className="text-red-500 text-sm font-semibold mb-2">
+                  {error}
+                </div>
+              )}
+
               {/* Name Field */}
               <div className="flex flex-col gap-2">
                 <label className="text-[14px] font-bold text-[#112C44] tracking-wide">
-                  Your Name
+                  Your Name (Optional)
                 </label>
                 {/* 🛠️ BUMPED HEIGHT (h-12), TEXT SIZE (text-base), and PADDING (px-4) */}
                 <input
@@ -58,7 +85,6 @@ export function LoginForm() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your full name"
                   className="w-full h-12 px-4 text-base bg-gray-50 text-gray-800 rounded-lg border border-gray-200 focus:outline-none focus:border-[#112C44] focus:bg-white transition-all"
-                  required
                 />
               </div>
 
@@ -70,8 +96,11 @@ export function LoginForm() {
                 {/* 🛠️ BUMPED HEIGHT (h-12), TEXT SIZE (text-base), and PADDING (px-4) */}
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
                   className="w-full h-12 px-4 text-base bg-gray-50 text-gray-800 rounded-lg border border-gray-200 focus:outline-none focus:border-[#112C44] focus:bg-white transition-all"
+                  required
                 />
               </div>
 
@@ -83,8 +112,11 @@ export function LoginForm() {
                 {/* 🛠️ BUMPED HEIGHT (h-12), TEXT SIZE (text-base), and PADDING (px-4) */}
                 <input
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   className="w-full h-12 px-4 text-base bg-gray-50 text-gray-800 rounded-lg border border-gray-200 focus:outline-none focus:border-[#112C44] focus:bg-white transition-all"
+                  required
                 />
                 <button
                   type="button"

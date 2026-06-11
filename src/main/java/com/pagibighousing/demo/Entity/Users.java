@@ -19,6 +19,7 @@ public class Users {
     private String cellphoneNumber;
     private String emailAddress;
     private String employerAddress;
+    private String password;
 
     public String getPagIbigRtn() {
         return pagIbigRtn;
@@ -98,5 +99,13 @@ public class Users {
 
     public void setEmployerAddress(String employerAddress) {
         this.employerAddress = employerAddress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

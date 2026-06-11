@@ -1,5 +1,6 @@
 package com.pagibighousing.demo.Controller;
 
+import com.pagibighousing.demo.DTO.AddPaymentModeDTO;
 import com.pagibighousing.demo.DTO.PaymentModeDTO;
 import com.pagibighousing.demo.Service.PaymentModeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,13 @@ public class PaymentModeController {
     private PaymentModeService paymentModeService;
 
     // CREATE → POST /payment
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<PaymentModeDTO> createPaymentMode(@RequestBody PaymentModeDTO dto) {
         return ResponseEntity.ok(paymentModeService.createPaymentMode(dto));
     }
 
     // READ ALL → GET /payment
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<List<PaymentModeDTO>> getAllPaymentModes() {
         return ResponseEntity.ok(paymentModeService.getAllPaymentModes());
     }

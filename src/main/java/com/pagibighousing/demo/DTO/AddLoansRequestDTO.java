@@ -8,7 +8,7 @@ public class AddLoansRequestDTO {
     private Double desiredLoanAmount;
     private Double downpaymentAmount;
     private String propertyId;
-    private Double CollateralValue;
+    private Double collateralValue;
 
     //what's happening here is that
     //when the user applies for a loan, we will take until down payment amount
@@ -73,10 +73,10 @@ public class AddLoansRequestDTO {
     }
 
     public Double getCollateralValue() {
-        return CollateralValue;
+        return collateralValue;
     }
 
     public void setCollateralValue(Double collateralValue) {
-        CollateralValue = collateralValue;
+        this.collateralValue = collateralValue;
     }
 }

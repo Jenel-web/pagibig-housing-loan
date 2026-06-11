@@ -34,6 +34,11 @@ public class UsersService {
         return usersRepository.findById(rtn);
     }
 
+    // Authenticate User by Email and Password
+    public Optional<Users> authenticateUser(String emailAddress, String password) {
+        return usersRepository.findByEmailAddressAndPassword(emailAddress, password);
+    }
+
     // Update / Modify Existing Profile
     @Transactional
     public String updateUser(String rtn, Users userDetails) {
@@ -49,6 +54,9 @@ public class UsersService {
         existingUser.setCellphoneNumber(userDetails.getCellphoneNumber());
         existingUser.setEmailAddress(userDetails.getEmailAddress());
         existingUser.setEmployerAddress(userDetails.getEmployerAddress());
+        if (userDetails.getPassword() != null && !userDetails.getPassword().isEmpty()) {
+            existingUser.setPassword(userDetails.getPassword());
+        }
 
         usersRepository.save(existingUser);
         return "User profile updated successfully!";
