@@ -19,10 +19,10 @@ export const ActionGrid: React.FC = () => {
     {
       imageSrc:
         "https://api.builder.io/api/v1/image/assets/TEMP/93bbd80c1382290ecbe24b605bb68c2f7c86e3c8?placeholderIfAbsent=true&apiKey=3fa53aa5a1cc472db90f2682b3fad13a",
-      title: "View Loan Status",
+      title: "View My Loans",
       shadowClass:
         "shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)]",
-      path: "#",
+      path: "/my-loans",
     },
     {
       imageSrc:

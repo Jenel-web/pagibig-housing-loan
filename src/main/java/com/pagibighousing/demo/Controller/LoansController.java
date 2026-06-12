@@ -31,7 +31,7 @@ public class LoansController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<GetLoansResponse>> getLoans(@RequestBody String userId){
+    public ResponseEntity<List<GetLoansResponse>> getLoans(@RequestParam String userId){
         List<GetLoansResponse> loansList = loansService.getLoansByUserId(userId);
 
         return ResponseEntity.ok(loansList);
