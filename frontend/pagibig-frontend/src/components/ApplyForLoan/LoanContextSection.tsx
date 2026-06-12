@@ -36,7 +36,7 @@ export const LoanContextSection: React.FC<LoanContextProps> = ({
             <option value="">Select Purpose</option>
             {purposes.map((purpose) => (
               <option key={purpose.purposeId} value={purpose.purposeId}>
-                {purpose.purposeDescription}
+                {purpose.purpose_description}
               </option>
             ))}
           </select>
@@ -56,7 +56,7 @@ export const LoanContextSection: React.FC<LoanContextProps> = ({
             <option value="">Select Mode</option>
             {modes.map((mode) => (
               <option key={mode.modeId} value={mode.modeId}>
-                {mode.modeDescription}
+                {mode.paymentModeDescription}
               </option>
             ))}
           </select>

@@ -19,7 +19,8 @@ export const LogoutButton: React.FC = () => {
     /* 🛠️ NAVIGATION REDIRECT ROUTE:
        Instantly snaps the browser viewport back to your /login landing frame view.
     */
-    navigate("/login");
+    // Redirect to the public landing page (not /login) and replace history so dashboard is gone
+    navigate("/", { replace: true });
   };
 
   return (

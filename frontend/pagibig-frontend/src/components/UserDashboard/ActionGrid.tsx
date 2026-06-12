@@ -40,6 +40,14 @@ export const ActionGrid: React.FC = () => {
         "shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)]",
       path: "#",
     },
+    {
+      imageSrc:
+        "https://api.builder.io/api/v1/image/assets/TEMP/eae499cadec4c22dd9e5a13e6076c6756e07e477?placeholderIfAbsent=true&apiKey=3fa53aa5a1cc472db90f2682b3fad13a", // using the profile/building icon placeholder for now
+      title: "Add Property",
+      shadowClass:
+        "shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)]",
+      path: "/add-property",
+    },
   ];
 
   return (

@@ -33,7 +33,7 @@ export const CollateralSection: React.FC<CollateralProps> = ({
             <option value="">Select Property Location</option>
             {properties.map((prop) => (
               <option key={prop.propertyId} value={prop.propertyId}>
-                {prop.location}
+                {prop.propertyLocation}
               </option>
             ))}
           </select>

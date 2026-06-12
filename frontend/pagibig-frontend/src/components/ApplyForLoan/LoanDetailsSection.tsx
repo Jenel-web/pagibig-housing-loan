@@ -38,15 +38,6 @@ export const LoanDetailsSection: React.FC<LoanDetailsSectionProps> = () => {
         required
       />
 
-      {/* Estimated Installment Amount: Set as a standard numeric tracker value */}
-      <InputField
-        label="Estimated Installment Amount (PHP)"
-        name="estimatedInstallmentAmount"
-        type="number"
-        placeholder="e.g., 18500"
-        min="0"
-        required
-      />
     </FormSection>
   );
 };

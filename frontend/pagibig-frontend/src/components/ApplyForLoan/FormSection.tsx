@@ -81,19 +81,6 @@ export const FormSection: React.FC<FormSectionProps> = ({
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-[13px] font-bold text-[#112C44]">
-            Estimated Installment Amount
-          </label>
-          <input
-            type="text"
-            value={formData.installment || ""}
-            onChange={(e) => handleInputChange("installment", e.target.value)}
-            disabled={isReviewMode}
-            className="w-full h-10 px-3 bg-gray-50 disabled:bg-gray-100 disabled:opacity-80 text-gray-800 rounded-md border border-gray-200 outline-none focus:border-[#112C44]"
-            placeholder="Estimated installment amount"
-          />
-        </div>
       </div>
     </div>
   );

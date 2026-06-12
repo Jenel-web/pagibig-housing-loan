@@ -122,7 +122,7 @@ export default function LoanApplicationForm() {
 
       <div className="w-full max-w-[960px] mx-auto px-6 pt-6 mt-[90px] flex items-center justify-start">
         <button
-          onClick={() => navigate("/")} 
+          onClick={() => navigate("/dashboard")}
           type="button"
           className="flex items-center gap-2 text-[15px] font-bold text-[#112C44] hover:underline cursor-pointer tracking-wide"
         >

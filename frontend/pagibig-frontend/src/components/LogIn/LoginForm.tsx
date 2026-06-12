@@ -1,11 +1,12 @@
 "use client";
 import * as React from "react";
 import { useState } from "react"; // 🛠️ Added state to track what the user types
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "../Navbar";
 
 export function LoginForm() {
   // Local state to capture the user's name input string
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,8 +35,8 @@ export function LoginForm() {
       localStorage.setItem("display_name", greetingName);
       localStorage.setItem("pagIbigRtn", userData.pagIbigRtn);
 
-      console.log(`Saving user name: ${greetingName}. Moving to dashboard...`);
-      window.location.href = "/dashboard";
+      // navigate with replace:true wipes the /login page from the browser back-button history stack
+      navigate("/dashboard", { replace: true });
     } catch (err: any) {
       setError(err.message || "An error occurred during login");
     }
