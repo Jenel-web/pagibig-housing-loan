@@ -43,6 +43,9 @@ public class Users {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "role")
+    private String role;
+
     public String getPagIbigRtn() {
         return pagIbigRtn;
     }
@@ -129,5 +132,13 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

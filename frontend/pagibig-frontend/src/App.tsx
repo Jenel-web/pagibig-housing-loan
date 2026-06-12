@@ -5,6 +5,7 @@ import { AccountCreationForm } from "./components/AccountCreation/AccountCreatio
 import ApplyLoan from "./components/ApplyForLoan/LoanApplicationForm";
 import AddPropertyForm from "./components/AddProperty/AddPropertyForm";
 import MyLoansPage from "./components/MyLoans/MyLoansPage";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import LogIn from "./components/LogIn/LoginPage";
 import Dashboard from "./components/UserDashboard/Dashboard"; // 🛠️ FIXED: Pointed directly to Dashboard.tsx
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -55,6 +56,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
             </ProtectedRoute>
           }
         />

@@ -38,6 +38,21 @@ public class LoansController {
     }
 
 
+    @GetMapping("/all")
+    public ResponseEntity<List<GetLoansResponse>> getAllLoans() {
+        return ResponseEntity.ok(loansService.getAllLoans());
+    }
 
+    @PutMapping("/{loanId}/status")
+    public ResponseEntity<String> updateLoanStatus(@PathVariable String loanId, @RequestBody String status) {
+        try {
+            // Remove quotes if the string was sent as a JSON string literal (e.g. "APPROVED")
+            String cleanStatus = status.replaceAll("^\"|\"$", "");
+            Loans updatedLoan = loansService.updateLoanStatus(loanId, cleanStatus);
+            return ResponseEntity.ok("Loan status updated to " + updatedLoan.getStatus());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to update status: " + e.getMessage());
+        }
+    }
 
 }

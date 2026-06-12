@@ -47,6 +47,7 @@ public class LoansService {
         loan.setDesiredLoanAmount(request.getDesiredLoanAmount());
         loan.setDesiredLoanTerm(request.getDesiredLoanTerm());
         loan.setDownpaymentAmount(request.getDownpaymentAmount());
+        loan.setStatus("PENDING");
 
         //calculates the installment
         double principal = request.getDesiredLoanAmount() - request.getDownpaymentAmount();
@@ -92,12 +93,48 @@ public class LoansService {
                     loan.getPurpose().getPurpose_description(),
                     property.getPropertyId(),
                     property.getPropertyLocation(),
-                    record.getCollateralValue()
+                    record.getCollateralValue(),
+                    loan.getStatus(),
+                    loan.getUser() != null ? loan.getUser().getPagIbigRtn() : ""
             );
 
             responseList.add(dto);
         }
 
         return responseList;
+    }
+
+    public List<GetLoansResponse> getAllLoans() {
+        List<LoanRecords> records = loanRecordsRepository.findAll();
+        List<GetLoansResponse> responseList = new ArrayList<>();
+
+        for (LoanRecords record : records) {
+            Loans loan = record.getLoan();
+            Property property = record.getProperty();
+            GetLoansResponse dto = new GetLoansResponse(
+                    loan.getLoanId(),
+                    loan.getDesiredLoanAmount(),
+                    loan.getDesiredLoanTerm(),
+                    loan.getDownpaymentAmount(),
+                    loan.getInstallmentAmount(),
+                    loan.getPaymentMode() != null ? loan.getPaymentMode().getPaymentModeDescription() : "",
+                    loan.getPurpose() != null ? loan.getPurpose().getPurpose_description() : "",
+                    property != null ? property.getPropertyId() : "",
+                    property != null ? property.getPropertyLocation() : "",
+                    record.getCollateralValue(),
+                    loan.getStatus(),
+                    loan.getUser() != null ? loan.getUser().getPagIbigRtn() : ""
+            );
+            responseList.add(dto);
+        }
+        return responseList;
+    }
+
+    @Transactional
+    public Loans updateLoanStatus(String loanId, String status) {
+        Loans loan = loansRepository.findById(loanId)
+                .orElseThrow(() -> new RuntimeException("Loan not found with ID: " + loanId));
+        loan.setStatus(status);
+        return loansRepository.save(loan);
     }
 }

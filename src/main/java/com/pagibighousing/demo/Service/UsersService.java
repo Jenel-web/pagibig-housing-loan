@@ -23,6 +23,9 @@ public class UsersService {
         if (usersRepository.findByEmailAddress(user.getEmailAddress()).isPresent()) {
             throw new RuntimeException("User with this email address already exists.");
         }
+        if (user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("USER");
+        }
         return usersRepository.save(user);
     }
 

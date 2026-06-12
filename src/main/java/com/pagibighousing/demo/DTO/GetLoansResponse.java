@@ -11,6 +11,8 @@ public class GetLoansResponse {
     private String propertyId;
     private String propertyLocation;
     private Double collateralValue;
+    private String status;
+    private String pagIbigRtn;
 
     public GetLoansResponse(String loanId,
                             Double desiredLoanAmount,
@@ -21,7 +23,9 @@ public class GetLoansResponse {
                             String purposeDescription,
                             String propertyId,
                             String propertyLocation,
-                            Double collateralValue) {
+                            Double collateralValue,
+                            String status,
+                            String pagIbigRtn) {
         this.loanId = loanId;
         this.desiredLoanAmount = desiredLoanAmount;
         this.desiredLoanTerm = desiredLoanTerm;
@@ -32,6 +36,8 @@ public class GetLoansResponse {
         this.propertyId = propertyId;
         this.propertyLocation = propertyLocation;
         this.collateralValue = collateralValue;
+        this.status = status;
+        this.pagIbigRtn = pagIbigRtn;
     }
 
     public String getLoanId() {
@@ -112,5 +118,21 @@ public class GetLoansResponse {
 
     public void setCollateralValue(Double collateralValue) {
         this.collateralValue = collateralValue;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPagIbigRtn() {
+        return pagIbigRtn;
+    }
+
+    public void setPagIbigRtn(String pagIbigRtn) {
+        this.pagIbigRtn = pagIbigRtn;
     }
 }

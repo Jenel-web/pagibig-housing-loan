@@ -34,9 +34,14 @@ export function LoginForm() {
       const greetingName = name.trim() ? name.trim() : userData.borrowerName || "User";
       localStorage.setItem("display_name", greetingName);
       localStorage.setItem("pagIbigRtn", userData.pagIbigRtn);
+      localStorage.setItem("userRole", userData.role || "USER");
 
-      // navigate with replace:true wipes the /login page from the browser back-button history stack
-      navigate("/dashboard", { replace: true });
+      if (userData.role === "ADMIN") {
+        navigate("/admin/dashboard", { replace: true });
+      } else {
+        // navigate with replace:true wipes the /login page from the browser back-button history stack
+        navigate("/dashboard", { replace: true });
+      }
     } catch (err: any) {
       setError(err.message || "An error occurred during login");
     }
