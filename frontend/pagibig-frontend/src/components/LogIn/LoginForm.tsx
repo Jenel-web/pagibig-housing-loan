@@ -124,12 +124,6 @@ export function LoginForm() {
                   className="w-full h-12 px-4 text-base bg-gray-50 text-gray-800 rounded-lg border border-gray-200 focus:outline-none focus:border-[#112C44] focus:bg-white transition-all"
                   required
                 />
-                <button
-                  type="button"
-                  className="text-left text-sm font-bold text-[#112C44]/80 hover:text-[#112C44] hover:underline w-fit mt-1 transition-all"
-                >
-                  Forgot Password?
-                </button>
               </div>
 
               {/* 🛠️ ENLARGED BUTTON: Increased to h-12 with text-base tracking */}

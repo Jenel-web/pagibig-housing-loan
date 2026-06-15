@@ -26,22 +26,6 @@ export const ActionGrid: React.FC = () => {
     },
     {
       imageSrc:
-        "https://api.builder.io/api/v1/image/assets/TEMP/eae499cadec4c22dd9e5a13e6076c6756e07e477?placeholderIfAbsent=true&apiKey=3fa53aa5a1cc472db90f2682b3fad13a",
-      title: "Update Profile",
-      shadowClass:
-        "shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)]",
-      path: "#",
-    },
-    {
-      imageSrc:
-        "https://api.builder.io/api/v1/image/assets/TEMP/fe3f99e4339da69d2e6d6a40efd9e524439304a8?placeholderIfAbsent=true&apiKey=3fa53aa5a1cc472db90f2682b3fad13a",
-      title: "Upload Document",
-      shadowClass:
-        "shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)]",
-      path: "#",
-    },
-    {
-      imageSrc:
         "https://api.builder.io/api/v1/image/assets/TEMP/eae499cadec4c22dd9e5a13e6076c6756e07e477?placeholderIfAbsent=true&apiKey=3fa53aa5a1cc472db90f2682b3fad13a", // using the profile/building icon placeholder for now
       title: "Add Property",
       shadowClass:
@@ -53,10 +37,10 @@ export const ActionGrid: React.FC = () => {
   return (
     /* 🛠️ RESPONSIVE FLEX/GRID ENGINE:
        - Stripped out volatile template absolute positions (absolute z-0 bottom left etc.)
-       - Uses a clean grid layout that automatically tiles 4 columns wide on desktops
+       - Uses a clean grid layout that automatically tiles 3 columns wide on desktops
        - Added an explicit max-w constraint and centered it to keep alignment inside the main body container perfect
-    */
-    <section className="w-full max-w-[960px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-4 py-8">
+     */
+    <section className="w-full max-w-[960px] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 px-4 py-8">
       {actions.map((action, index) => (
         <ActionCard
           key={index}

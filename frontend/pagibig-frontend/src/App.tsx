@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home";
+import LearnMore from "./components/LearnMore";
+import Contact from "./components/Contact";
 import { AccountCreationForm } from "./components/AccountCreation/AccountCreationForm";
 import ApplyLoan from "./components/ApplyForLoan/LoanApplicationForm";
 import AddPropertyForm from "./components/AddProperty/AddPropertyForm";
@@ -21,6 +23,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<AuthRedirect><Home /></AuthRedirect>} />
+        <Route path="/learn" element={<LearnMore />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/register" element={<AccountCreationForm />} />
         <Route
           path="/apply"
