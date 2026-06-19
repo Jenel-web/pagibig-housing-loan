@@ -21,6 +21,7 @@ public class    Loans {
     private Integer desiredLoanTerm;
     private Double downpaymentAmount;
     private Double installmentAmount;
+    private String status;
 
     public String getLoanId() {
         return loanId;
@@ -84,5 +85,13 @@ public class    Loans {
 
     public void setInstallmentAmount(Double installmentAmount) {
         this.installmentAmount = installmentAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

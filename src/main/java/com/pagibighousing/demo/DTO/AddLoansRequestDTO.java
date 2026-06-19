@@ -1,19 +1,28 @@
 package com.pagibighousing.demo.DTO;
 
 public class AddLoansRequestDTO {
+    private String pagIbigRtn;
     private String purposeId;
     private String modeId;
     private Integer desiredLoanTerm;
     private Double desiredLoanAmount;
     private Double downpaymentAmount;
     private String propertyId;
-    private Double CollateralValue;
+    private Double collateralValue;
 
     //what's happening here is that
     //when the user applies for a loan, we will take until down payment amount
     // and derived the other details,then save the loan. then we will handle the adding of the
     //loan records using the loanId, propertyID and the collateral value.
 
+
+    public String getPagIbigRtn() {
+        return pagIbigRtn;
+    }
+
+    public void setPagIbigRtn(String pagIbigRtn) {
+        this.pagIbigRtn = pagIbigRtn;
+    }
 
     public String getPurposeId() {
         return purposeId;
@@ -64,10 +73,10 @@ public class AddLoansRequestDTO {
     }
 
     public Double getCollateralValue() {
-        return CollateralValue;
+        return collateralValue;
     }
 
     public void setCollateralValue(Double collateralValue) {
-        CollateralValue = collateralValue;
+        this.collateralValue = collateralValue;
     }
 }

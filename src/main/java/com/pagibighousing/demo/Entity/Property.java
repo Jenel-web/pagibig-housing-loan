@@ -1,5 +1,6 @@
 package com.pagibighousing.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,6 +9,7 @@ public class Property {
     private String propertyId;
     @ManyToOne
     @JoinColumn(name = "pag_ibig_rtn")
+    @JsonIgnoreProperties("properties")
     private Users user;
     private String propertyLocation;
     private String titleHolderName;

@@ -2,29 +2,57 @@ package com.pagibighousing.demo.Controller;
 
 import com.pagibighousing.demo.DTO.AddLoansRequestDTO;
 import com.pagibighousing.demo.DTO.AddPurposeDTO;
+import com.pagibighousing.demo.DTO.GetLoansResponse;
+import com.pagibighousing.demo.Entity.Loans;
 import com.pagibighousing.demo.Service.LoansService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/loans")
+@CrossOrigin(origins = "http://localhost:5173")
 public class LoansController {
 
     @Autowired
     private LoansService loansService;
 
     @PostMapping("/createLoan")
-    public ResponseEntity<String> createLoan(@RequestBody AddLoansRequestDTO request){
-        String result = loansService.createLoan(request);
-
-        if(!result.isEmpty()){
-            return  ResponseEntity.ok(result);
+    public ResponseEntity<?> createLoan(@RequestBody AddLoansRequestDTO request){
+        try {
+            Loans result = loansService.createLoan(request);
+            return ResponseEntity.ok("Loan successfully created with ID: " + result.getLoanId() +
+                    " | Monthly Base Installment: PHP " + result.getInstallmentAmount());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to process loan application: " + e.getMessage());
         }
-        return ResponseEntity.ok("Loan creation unsuccessful");
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<GetLoansResponse>> getLoans(@RequestParam String userId){
+        List<GetLoansResponse> loansList = loansService.getLoansByUserId(userId);
+
+        return ResponseEntity.ok(loansList);
+    }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<GetLoansResponse>> getAllLoans() {
+        return ResponseEntity.ok(loansService.getAllLoans());
+    }
+
+    @PutMapping("/{loanId}/status")
+    public ResponseEntity<String> updateLoanStatus(@PathVariable String loanId, @RequestBody String status) {
+        try {
+            // Remove quotes if the string was sent as a JSON string literal (e.g. "APPROVED")
+            String cleanStatus = status.replaceAll("^\"|\"$", "");
+            Loans updatedLoan = loansService.updateLoanStatus(loanId, cleanStatus);
+            return ResponseEntity.ok("Loan status updated to " + updatedLoan.getStatus());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to update status: " + e.getMessage());
+        }
     }
 
 }
